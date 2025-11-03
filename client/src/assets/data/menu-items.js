@@ -10,15 +10,9 @@ export const MENU_ITEMS = [
     label: 'Dashboard',
     children: [
       {
-        key: 'ecommerce-services',
-        label: 'Services',
-        url: '/ecommerce/services',
-        parentKey: 'ecommerce',
-      },
-      {
-        key: 'ecommerce-projects',
-        label: 'Projects',
-        url: '/ecommerce/projects',
+        key: 'ecommerce-stories',
+        label: 'Stories',
+        url: '/ecommerce/stories',
         parentKey: 'ecommerce',
       },
 

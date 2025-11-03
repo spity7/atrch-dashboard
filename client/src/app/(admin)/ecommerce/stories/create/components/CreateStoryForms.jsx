@@ -10,7 +10,7 @@ import ProductSubmittedForm from './ProductSubmittedForm'
 const formSteps = [
   {
     index: 1,
-    name: 'Project Details',
+    name: 'Story Details',
     icon: 'bxs:contact',
     tab: <GeneralDetailsForm />,
   },
@@ -34,7 +34,7 @@ const formSteps = [
   // },
 ]
 
-const CreateProjectForms = () => {
+const CreateStoryForms = () => {
   const [activeStep, setActiveStep] = useState(1)
 
   return (
@@ -82,4 +82,4 @@ const CreateProjectForms = () => {
     </>
   )
 }
-export default CreateProjectForms
+export default CreateStoryForms

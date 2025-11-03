@@ -1,19 +1,19 @@
 import { Card, CardBody, Col, Row } from 'react-bootstrap'
 import PageBreadcrumb from '@/components/layout/PageBreadcrumb'
-import CreateProjectForms from './components/CreateProjectForms'
+import CreateStoryForms from './components/CreateStoryForms'
 import PageMetaData from '@/components/PageTitle'
 
-const CreateProject = () => {
+const CreateStory = () => {
   return (
     <>
-      <PageBreadcrumb title="Create Project" subName="Vertex" />
-      <PageMetaData title="Create Project" />
+      <PageBreadcrumb title="Create Story" subName="Vertex" />
+      <PageMetaData title="Create Story" />
 
       <Row>
         <Col>
           <Card>
             <CardBody>
-              <CreateProjectForms />
+              <CreateStoryForms />
             </CardBody>
           </Card>
         </Col>
@@ -21,4 +21,4 @@ const CreateProject = () => {
     </>
   )
 }
-export default CreateProject
+export default CreateStory

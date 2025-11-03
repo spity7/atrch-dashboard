@@ -21,7 +21,7 @@ router.post(
   "/stories",
   upload.fields([
     { name: "thumbnail", maxCount: 1 },
-    { name: "gallery", maxCount: 30 },
+    { name: "gallery", maxCount: 1 },
   ]),
   createStory
 );
@@ -31,7 +31,7 @@ router.put(
   "/stories/:id",
   upload.fields([
     { name: "thumbnail", maxCount: 1 },
-    { name: "gallery", maxCount: 30 },
+    { name: "gallery", maxCount: 1 },
   ]),
   updateStory
 );

@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom'
 import ReactTable from '@/components/Table'
 import IconifyIcon from '@/components/wrappers/IconifyIcon'
 import { useGlobalContext } from '@/context/useGlobalContext'
-import Swal from 'sweetalert2' // optional for nicer confirm dialog
+import Swal from 'sweetalert2'
 
-const ServicesListTable = ({ services }) => {
-  const { deleteService } = useGlobalContext() // ✅ hook inside component
+const StoriesListTable = ({ stories }) => {
+  const { deleteStory } = useGlobalContext() // ✅ hook inside component
 
   const handleDelete = async (id) => {
     const result = await Swal.fire({
       title: 'Are you sure?',
-      text: 'This will permanently delete the service!',
+      text: 'This will permanently delete the story!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
@@ -19,8 +19,8 @@ const ServicesListTable = ({ services }) => {
 
     if (result.isConfirmed) {
       try {
-        await deleteService(id)
-        Swal.fire('Deleted!', 'Service has been deleted.', 'success')
+        await deleteStory(id)
+        Swal.fire('Deleted!', 'Story has been deleted.', 'success')
         // Optionally refresh table data from parent component
         window.location.reload()
       } catch (error) {
@@ -31,16 +31,16 @@ const ServicesListTable = ({ services }) => {
 
   const columns = [
     {
-      header: 'Service Name',
+      header: 'Story Title',
       cell: ({
         row: {
-          original: { _id, iconUrl, name, description },
+          original: { _id, thumbnailUrl, title },
         },
       }) => (
         <div className="d-flex align-items-center">
           <div className="flex-shrink-0 me-3">
-            {iconUrl ? (
-              <img src={iconUrl} alt={name} className="img-fluid avatar-sm" style={{ width: 50, height: 50, objectFit: 'contain' }} />
+            {thumbnailUrl ? (
+              <img src={thumbnailUrl} alt={title} className="img-fluid avatar-sm" style={{ width: 50, height: 50, objectFit: 'contain' }} />
             ) : (
               <div className="bg-light d-flex align-items-center justify-content-center rounded" style={{ width: 50, height: 50 }}>
                 <IconifyIcon icon="bx:image" className="text-muted fs-4" />
@@ -48,13 +48,7 @@ const ServicesListTable = ({ services }) => {
             )}
           </div>
           <div className="flex-grow-1">
-            <h5 className="mt-0 mb-1">{name}</h5>
-            <span
-              className="fs-13 text-muted"
-              dangerouslySetInnerHTML={{
-                __html: description?.slice(0, 100) + (description.length > 100 ? '...' : ''),
-              }}
-            />
+            <h5 className="mt-0 mb-1">{title}</h5>
           </div>
         </div>
       ),
@@ -67,10 +61,10 @@ const ServicesListTable = ({ services }) => {
         },
       }) => (
         <div className="d-flex gap-2">
-          <Link to={`/ecommerce/services/edit/${_id}`} className="btn btn-sm btn-soft-secondary" title="Edit Service">
+          <Link to={`/ecommerce/stories/edit/${_id}`} className="btn btn-sm btn-soft-secondary" title="Edit Story">
             <IconifyIcon icon="bx:edit" className="fs-18" />
           </Link>
-          <button type="button" className="btn btn-sm btn-soft-danger" title="Delete Service" onClick={() => handleDelete(_id)}>
+          <button type="button" className="btn btn-sm btn-soft-danger" title="Delete Story" onClick={() => handleDelete(_id)}>
             <IconifyIcon icon="bx:trash" className="fs-18" />
           </button>
         </div>
@@ -79,11 +73,10 @@ const ServicesListTable = ({ services }) => {
   ]
 
   const pageSizeList = [5, 10, 20, 50]
-
   return (
     <ReactTable
       columns={columns}
-      data={services}
+      data={stories}
       rowsPerPageList={pageSizeList}
       pageSize={10}
       tableClass="text-nowrap mb-0"
@@ -92,4 +85,4 @@ const ServicesListTable = ({ services }) => {
     />
   )
 }
-export default ServicesListTable
+export default StoriesListTable

@@ -5,28 +5,28 @@ import PageBreadcrumb from '@/components/layout/PageBreadcrumb'
 import PageMetaData from '@/components/PageTitle'
 import IconifyIcon from '@/components/wrappers/IconifyIcon'
 import { useGlobalContext } from '@/context/useGlobalContext'
-import ServicesListTable from './components/ServicesListTable'
+import StoriesListTable from './components/StoriesListTable'
 
-const Services = () => {
-  const { getAllServices } = useGlobalContext()
-  const [servicesList, setServicesList] = useState([])
+const Stories = () => {
+  const { getAllStories } = useGlobalContext()
+  const [storiesList, setStoriesList] = useState([])
 
   useEffect(() => {
-    const fetchServices = async () => {
+    const fetchStories = async () => {
       try {
-        const data = await getAllServices()
-        setServicesList(data)
+        const data = await getAllStories()
+        setStoriesList(data)
       } catch (error) {
-        console.error('Error fetching services:', error)
+        console.error('Error fetching stories:', error)
       }
     }
-    fetchServices()
-  }, [getAllServices])
+    fetchStories()
+  }, [getAllStories])
 
   return (
     <>
-      <PageMetaData title="Services List" />
-      <PageBreadcrumb title="Services List" subName="Vertex" />
+      <PageMetaData title="Stories List" />
+      <PageBreadcrumb title="Stories List" subName="Vertex" />
       <Row>
         <Col>
           <Card>
@@ -39,20 +39,18 @@ const Services = () => {
                   <input type="search" className="form-control" id="search" placeholder="Search ..." />
                 </div> */}
                 <div>
-                  <Link to="/ecommerce/services/create" className="btn btn-primary d-flex align-items-center">
+                  <Link to="/ecommerce/stories/create" className="btn btn-primary d-flex align-items-center">
                     <IconifyIcon icon="bx:plus" className="me-1" />
-                    Create Service
+                    Create Story
                   </Link>
                 </div>
               </div>
             </CardBody>
-            <div>
-              {servicesList.length > 0 ? <ServicesListTable services={servicesList} /> : <div className="text-center p-4">No services found</div>}
-            </div>
+            <div>{storiesList.length > 0 ? <StoriesListTable stories={storiesList} /> : <div className="text-center p-4">No stories found</div>}</div>
           </Card>
         </Col>
       </Row>
     </>
   )
 }
-export default Services
+export default Stories

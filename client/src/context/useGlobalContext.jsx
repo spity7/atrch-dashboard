@@ -2,8 +2,8 @@ import { createContext, useContext, useMemo } from 'react'
 import axios from 'axios'
 
 axios.defaults.withCredentials = true
-// const BASE_URL = 'https://api.atrch.com/api/v1/'
-const BASE_URL = 'http://localhost:5006/api/v1/'
+const BASE_URL = 'https://api.atrch.com/api/v1/'
+// const BASE_URL = 'http://localhost:5006/api/v1/'
 
 const GlobalContext = createContext()
 
@@ -26,85 +26,43 @@ export const GlobalProvider = ({ children }) => {
     return instance
   }, [])
 
-  const createService = async (data) => {
-    const response = await axiosInstance.post('/services', data, {
+  const createStory = async (data) => {
+    const response = await axiosInstance.post('/stories', data, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
     return response.data
   }
 
-  const getAllServices = async () => {
-    const response = await axiosInstance.get('/services')
-    return response.data.services
+  const getAllStories = async () => {
+    const response = await axiosInstance.get('/stories')
+    return response.data.stories
   }
 
-  const getServiceById = async (id) => {
-    const response = await axiosInstance.get(`/services/${id}`)
-    return response.data.service
+  const getStoryById = async (id) => {
+    const response = await axiosInstance.get(`/stories/${id}`)
+    return response.data.story
   }
 
-  const updateService = async (id, data) => {
-    const response = await axiosInstance.put(`/services/${id}`, data, {
+  const updateStory = async (id, data) => {
+    const response = await axiosInstance.put(`/stories/${id}`, data, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
-    return response.data.service
+    return response.data.story
   }
 
-  const deleteService = async (id) => {
-    const response = await axiosInstance.delete(`/services/${id}`)
-    return response.data
-  }
-
-  const createProject = async (data) => {
-    const response = await axiosInstance.post('/projects', data, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-    return response.data
-  }
-
-  const getAllProjects = async () => {
-    const response = await axiosInstance.get('/projects')
-    return response.data.projects
-  }
-
-  const getProjectById = async (id) => {
-    const response = await axiosInstance.get(`/projects/${id}`)
-    return response.data.project
-  }
-
-  const updateProject = async (id, data) => {
-    const response = await axiosInstance.put(`/projects/${id}`, data, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-    return response.data.project
-  }
-
-  const deleteProject = async (id) => {
-    const response = await axiosInstance.delete(`/projects/${id}`)
-    return response.data
-  }
-
-  const deleteProjectGalleryImage = async (id, imageUrl) => {
-    const response = await axiosInstance.delete(`/projects/${id}/gallery`, {
-      data: { imageUrl },
-    })
+  const deleteStory = async (id) => {
+    const response = await axiosInstance.delete(`/stories/${id}`)
     return response.data
   }
 
   return (
     <GlobalContext.Provider
       value={{
-        createService,
-        getAllServices,
-        getServiceById,
-        updateService,
-        deleteService,
-        createProject,
-        getAllProjects,
-        getProjectById,
-        updateProject,
-        deleteProject,
-        deleteProjectGalleryImage,
+        createStory,
+        getAllStories,
+        getStoryById,
+        updateStory,
+        deleteStory,
       }}>
       {children}
     </GlobalContext.Provider>

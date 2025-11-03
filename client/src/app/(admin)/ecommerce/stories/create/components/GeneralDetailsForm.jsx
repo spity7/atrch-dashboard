@@ -6,18 +6,14 @@ import ReactQuill from 'react-quill'
 import * as yup from 'yup'
 import SelectFormInput from '@/components/form/SelectFormInput'
 import TextFormInput from '@/components/form/TextFormInput'
-import { getAllProjectCategories } from '@/helpers/data'
 import { renameKeys } from '@/utils/rename-object-keys'
 import 'react-quill/dist/quill.snow.css'
 import { useGlobalContext } from '@/context/useGlobalContext'
 import DropzoneFormInput from '@/components/form/DropzoneFormInput'
 
 const generalFormSchema = yup.object({
-  name: yup.string().required('Project name is required'),
-  title: yup.string().required('Project title is required'),
-  category: yup.string().required('Project Category is required'),
-  descQuill: yup.string().required('Project description is required'),
-  location: yup.string().required('Project location is required'),
+  title: yup.string().required('Story title is required'),
+  descQuill: yup.string().required('Story description is required'),
 })
 
 const normalizeQuillValue = (value) => {
@@ -26,27 +22,11 @@ const normalizeQuillValue = (value) => {
 }
 
 const GeneralDetailsForm = () => {
-  const { createProject } = useGlobalContext()
+  const { createStory } = useGlobalContext()
   const [loading, setLoading] = useState(false)
   const [thumbnailFile, setThumbnailFile] = useState(null)
-  const [galleryFiles, setGalleryFiles] = useState([])
-  const [projectCategories, setProjectCategories] = useState([])
+  const [galleryFile, setGalleryFile] = useState(null)
   const [resetDropzones, setResetDropzones] = useState(false)
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const data = await getAllProjectCategories()
-      if (!data) return
-      const categoryOptions = data.map((category) =>
-        renameKeys(category, {
-          id: 'value',
-          name: 'label',
-        }),
-      )
-      setProjectCategories(categoryOptions)
-    }
-    fetchCategories()
-  }, [])
 
   const {
     control,
@@ -56,11 +36,8 @@ const GeneralDetailsForm = () => {
   } = useForm({
     resolver: yupResolver(generalFormSchema),
     defaultValues: {
-      name: '',
       title: '',
-      category: '',
       descQuill: '',
-      location: '',
     },
   })
 
@@ -71,44 +48,36 @@ const GeneralDetailsForm = () => {
         alert('Thumbnail image is required')
         return
       }
+      if (!galleryFile) {
+        alert('Gallery image is required')
+        return
+      }
 
       const formData = new FormData()
-      formData.append('name', data.name)
       formData.append('title', data.title)
 
-      // ✅ Convert value to label before sending
-      const selectedCategory = projectCategories.find((cat) => cat.value === data.category)
-      const categoryName = selectedCategory ? selectedCategory.label : data.category
-      formData.append('category', categoryName)
-
       formData.append('description', data.descQuill)
-      formData.append('location', data.location)
       formData.append('thumbnail', thumbnailFile)
-
-      // ✅ multiple gallery files (optional)
-      galleryFiles.forEach((file) => formData.append('gallery', file))
+      formData.append('gallery', galleryFile)
 
       console.log([...formData.entries()])
 
-      await createProject(formData)
+      await createStory(formData)
 
-      alert('Project created successfully!')
+      alert('Story created successfully!')
 
       // ✅ Clear all form fields properly
       reset({
-        name: '',
         title: '',
-        category: '',
         descQuill: '',
-        location: '',
       })
 
       setThumbnailFile(null)
-      setGalleryFiles([])
+      setGalleryFile(null)
       setResetDropzones(true)
       setTimeout(() => setResetDropzones(false), 0) // reset flag
     } catch (error) {
-      alert(error?.response?.data?.message || '❌ Failed to create project')
+      alert(error?.response?.data?.message || '❌ Failed to create story')
     } finally {
       setLoading(false)
     }
@@ -120,35 +89,10 @@ const GeneralDetailsForm = () => {
         <Col lg={6}>
           <TextFormInput
             control={control}
-            label="Project Name"
-            placeholder="Enter project name"
-            containerClassName="mb-3"
-            id="project-name"
-            name="name"
-            // error={errors.name?.message}
-          />
-        </Col>
-        <Col lg={6}>
-          {projectCategories.length > 0 && (
-            <div className="mb-3">
-              <label htmlFor="projectSummary" className="form-label">
-                Category
-              </label>
-              <SelectFormInput control={control} name="category" options={projectCategories} />
-              {errors.category && <p className="text-danger mt-1">{errors.category.message}</p>}
-            </div>
-          )}
-        </Col>
-      </Row>
-
-      <Row>
-        <Col lg={6}>
-          <TextFormInput
-            control={control}
-            label="Project Title"
-            placeholder="Enter project title"
+            label="Story Title"
+            placeholder="Enter story title"
             containerClassTitle="mb-3"
-            id="project-title"
+            id="story-title"
             name="title"
             // error={errors.title?.message}
           />
@@ -158,7 +102,7 @@ const GeneralDetailsForm = () => {
       <Row>
         <Col lg={12}>
           <div className="mb-5 mt-3">
-            <label className="form-label">Project Description</label>
+            <label className="form-label">Story Description</label>
             <Controller
               name="descQuill"
               control={control}
@@ -193,7 +137,7 @@ const GeneralDetailsForm = () => {
       <Row>
         <Col lg={6}>
           <DropzoneFormInput
-            label="Project Thumbnail"
+            label="Story Thumbnail"
             labelClassName="fs-14 mb-1 mt-5"
             iconProps={{
               icon: 'bx:cloud-upload',
@@ -220,31 +164,37 @@ const GeneralDetailsForm = () => {
           {errors.thumbnail && <p className="text-danger mt-1">{errors.thumbnail.message}</p>}
         </Col>
         <Col lg={6}>
-          <TextFormInput control={control} name="location" label="Location" containerClassName="mb-4 mt-5" placeholder="Enter Location" />
-          {/* {errors.location && <p className="text-danger mt-1">{errors.location.message}</p>} */}
-        </Col>
-      </Row>
-
-      <Row>
-        <Col lg={12}>
           <DropzoneFormInput
-            label="Project Gallery"
-            labelClassName="fs-14 mb-1 mt-2"
+            label="Story Gallery"
+            labelClassName="fs-14 mb-1 mt-5"
             iconProps={{
               icon: 'bx:cloud-upload',
               height: 36,
               width: 36,
             }}
-            text="Upload Gallery Images"
+            text="Upload Gallery image"
             showPreview
             resetTrigger={resetDropzones}
-            onFileUpload={(files) => setGalleryFiles(files)}
+            onFileUpload={(files) => {
+              if (files.length > 1) {
+                alert('Only one gallery is allowed')
+                // 🧹 Immediately reset the Dropzone
+                setGalleryFile(null)
+                setResetDropzones(true)
+                setTimeout(() => setResetDropzones(false), 0)
+                return
+              }
+
+              // ✅ valid single file
+              setGalleryFile(files[0])
+            }}
           />
+          {errors.gallery && <p className="text-danger mt-1">{errors.gallery.message}</p>}
         </Col>
       </Row>
 
       <Button type="submit" disabled={loading} className="mt-4">
-        {loading ? 'Creating...' : 'Create Project'}
+        {loading ? 'Creating...' : 'Create Story'}
       </Button>
     </form>
   )

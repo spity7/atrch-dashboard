@@ -22,7 +22,7 @@ exports.createStory = async (req, res) => {
     }
 
     // Upload thumbnail
-    const thumbnailFileName = `stories/thumbnail/${Date.now()}_${
+    const thumbnailFileName = `stories/thumbnails/${Date.now()}_${
       thumbnailFile.originalname
     }`;
     const thumbnailUrl = await uploadImage(
@@ -87,7 +87,7 @@ exports.updateStory = async (req, res) => {
   try {
     const { title, description } = req.body;
     const thumbnailFile = req.files?.thumbnail?.[0];
-    const galleryFile = req.files?.gallery || [];
+    const galleryFile = req.files?.gallery?.[0];
 
     // ✅ Find existing story first
     const existingStory = await Story.findById(req.params.id);

@@ -7,12 +7,9 @@ const Finance = lazy(() => import('@/app/(admin)/dashboard/finance/page'))
 const Sales = lazy(() => import('@/app/(admin)/dashboard/sales/page'))
 
 // Apps Routes
-const EcommerceServices = lazy(() => import('@/app/(admin)/ecommerce/services/page'))
-const EcommerceServiceCreate = lazy(() => import('@/app/(admin)/ecommerce/services/create/page'))
-const EcommerceServiceUpdate = lazy(() => import('@/app/(admin)/ecommerce/services/edit/[id]/page'))
-const EcommerceProjects = lazy(() => import('@/app/(admin)/ecommerce/projects/page'))
-const EcommerceProjectCreate = lazy(() => import('@/app/(admin)/ecommerce/projects/create/page'))
-const EcommerceProjectUpdate = lazy(() => import('@/app/(admin)/ecommerce/projects/edit/[id]/page'))
+const EcommerceStories = lazy(() => import('@/app/(admin)/ecommerce/stories/page'))
+const EcommerceStoryCreate = lazy(() => import('@/app/(admin)/ecommerce/stories/create/page'))
+const EcommerceStoryUpdate = lazy(() => import('@/app/(admin)/ecommerce/stories/edit/[id]/page'))
 
 const EcommerceProducts = lazy(() => import('@/app/(admin)/ecommerce/products/page'))
 const EcommerceProductDetails = lazy(() => import('@/app/(admin)/ecommerce/products/[productId]/page'))
@@ -137,7 +134,7 @@ const initialRoutes = [
   {
     path: '/',
     name: 'root',
-    element: <Navigate to="/ecommerce/services" />,
+    element: <Navigate to="/ecommerce/stories" />,
   },
   {
     path: '*',
@@ -164,34 +161,19 @@ const generalRoutes = [
 ]
 const appsRoutes = [
   {
-    name: 'Services',
-    path: '/ecommerce/services',
-    element: <EcommerceServices />,
+    name: 'Stories',
+    path: '/ecommerce/stories',
+    element: <EcommerceStories />,
   },
   {
-    name: 'Create Service',
-    path: '/ecommerce/services/create',
-    element: <EcommerceServiceCreate />,
+    name: 'Create Story',
+    path: '/ecommerce/stories/create',
+    element: <EcommerceStoryCreate />,
   },
   {
-    name: 'Service Update',
-    path: '/ecommerce/services/edit/:id',
-    element: <EcommerceServiceUpdate />,
-  },
-  {
-    name: 'Projects',
-    path: '/ecommerce/projects',
-    element: <EcommerceProjects />,
-  },
-  {
-    name: 'Create Project',
-    path: '/ecommerce/projects/create',
-    element: <EcommerceProjectCreate />,
-  },
-  {
-    name: 'Project Update',
-    path: '/ecommerce/projects/edit/:id',
-    element: <EcommerceProjectUpdate />,
+    name: 'Story Update',
+    path: '/ecommerce/stories/edit/:id',
+    element: <EcommerceStoryUpdate />,
   },
 
   {
