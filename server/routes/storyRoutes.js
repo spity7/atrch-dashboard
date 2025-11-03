@@ -2,13 +2,12 @@ const express = require("express");
 const multer = require("multer");
 const router = express.Router();
 const {
-  createProject,
-  getAllProjects,
-  getProjectById,
-  updateProject,
-  deleteProject,
-  deleteProjectImage,
-} = require("../controllers/projectController");
+  createStory,
+  getAllStories,
+  getStoryById,
+  updateStory,
+  deleteStory,
+} = require("../controllers/storyController");
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -19,24 +18,23 @@ const upload = multer({
 });
 
 router.post(
-  "/projects",
+  "/stories",
   upload.fields([
     { name: "thumbnail", maxCount: 1 },
     { name: "gallery", maxCount: 30 },
   ]),
-  createProject
+  createStory
 );
-router.get("/projects", getAllProjects);
-router.get("/projects/:id", getProjectById);
+router.get("/stories", getAllStories);
+router.get("/stories/:id", getStoryById);
 router.put(
-  "/projects/:id",
+  "/stories/:id",
   upload.fields([
     { name: "thumbnail", maxCount: 1 },
     { name: "gallery", maxCount: 30 },
   ]),
-  updateProject
+  updateStory
 );
-router.delete("/projects/:id", deleteProject);
-router.delete("/projects/:id/gallery", deleteProjectImage);
+router.delete("/stories/:id", deleteStory);
 
 module.exports = router;

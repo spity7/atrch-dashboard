@@ -8,8 +8,7 @@ const rateLimiter = require("./middlewares/rateLimiter");
 const securityHeaders = require("./middlewares/securityHeaders");
 const csp = require("./middlewares/csp");
 const userRoutes = require("./routes/userRoutes");
-const serviceRoutes = require("./routes/serviceRoutes");
-const projectRoutes = require("./routes/projectRoutes");
+const storyRoutes = require("./routes/storyRoutes");
 const logger = require("./config/logger");
 require("./cron/cron");
 
@@ -26,10 +25,10 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:3000",
-      "http://localhost:5005",
-      "https://vertex-engineering.co",
-      "https://dashboard.vertex-engineering.co",
-      "https://api.vertex-engineering.co",
+      "http://localhost:5006",
+      "https://atrch.com",
+      "https://dashboard.atrch.com",
+      "https://api.atrch.com",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: [
@@ -53,9 +52,7 @@ app.use(securityHeaders);
 
 // Routes
 app.use("/api/v1", userRoutes);
-app.use("/api/v1", serviceRoutes);
-app.use("/api/v1", projectRoutes);
-// app.use("/api/v1", propertyRoutes);
+app.use("/api/v1", storyRoutes);
 
 // errorhandling for Middleware
 app.use((err, req, res, next) => {
