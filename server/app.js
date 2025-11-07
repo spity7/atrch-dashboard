@@ -9,6 +9,7 @@ const securityHeaders = require("./middlewares/securityHeaders");
 const csp = require("./middlewares/csp");
 const userRoutes = require("./routes/userRoutes");
 const storyRoutes = require("./routes/storyRoutes");
+const handizRoutes = require("./routes/handizRoutes");
 const logger = require("./config/logger");
 require("./cron/cron");
 
@@ -53,6 +54,7 @@ app.use(securityHeaders);
 // Routes
 app.use("/api/v1", userRoutes);
 app.use("/api/v1", storyRoutes);
+app.use("/api/v1", handizRoutes);
 
 // errorhandling for Middleware
 app.use((err, req, res, next) => {

@@ -10,6 +10,9 @@ const Sales = lazy(() => import('@/app/(admin)/dashboard/sales/page'))
 const EcommerceStories = lazy(() => import('@/app/(admin)/ecommerce/stories/page'))
 const EcommerceStoryCreate = lazy(() => import('@/app/(admin)/ecommerce/stories/create/page'))
 const EcommerceStoryUpdate = lazy(() => import('@/app/(admin)/ecommerce/stories/edit/[id]/page'))
+const EcommerceHandiz = lazy(() => import('@/app/(admin)/ecommerce/handiz/page'))
+const EcommerceHandizCreate = lazy(() => import('@/app/(admin)/ecommerce/handiz/create/page'))
+const EcommerceHandizUpdate = lazy(() => import('@/app/(admin)/ecommerce/handiz/edit/[id]/page'))
 
 const EcommerceProducts = lazy(() => import('@/app/(admin)/ecommerce/products/page'))
 const EcommerceProductDetails = lazy(() => import('@/app/(admin)/ecommerce/products/[productId]/page'))
@@ -174,6 +177,21 @@ const appsRoutes = [
     name: 'Story Update',
     path: '/ecommerce/stories/edit/:id',
     element: <EcommerceStoryUpdate />,
+  },
+  {
+    name: 'Handiz',
+    path: '/ecommerce/handiz',
+    element: <EcommerceHandiz />,
+  },
+  {
+    name: 'Create Handiz',
+    path: '/ecommerce/handiz/create',
+    element: <EcommerceHandizCreate />,
+  },
+  {
+    name: 'Handiz Update',
+    path: '/ecommerce/handiz/edit/:id',
+    element: <EcommerceHandizUpdate />,
   },
 
   {

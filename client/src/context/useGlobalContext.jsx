@@ -51,7 +51,36 @@ export const GlobalProvider = ({ children }) => {
   }
 
   const deleteStory = async (id) => {
-    const response = await axiosInstance.delete(`/stories/${id}`)
+    const response = await axiosInstance.delete(`/handiz/${id}`)
+    return response.data
+  }
+
+  const createHandiz = async (data) => {
+    const response = await axiosInstance.post('/handiz', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response.data
+  }
+
+  const getAllHandiz = async () => {
+    const response = await axiosInstance.get('/handiz')
+    return response.data.handiz
+  }
+
+  const getHandizById = async (id) => {
+    const response = await axiosInstance.get(`/handiz/${id}`)
+    return response.data.handiz
+  }
+
+  const updateHandiz = async (id, data) => {
+    const response = await axiosInstance.put(`/handiz/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response.data.handiz
+  }
+
+  const deleteHandiz = async (id) => {
+    const response = await axiosInstance.delete(`/handiz/${id}`)
     return response.data
   }
 
@@ -63,6 +92,11 @@ export const GlobalProvider = ({ children }) => {
         getStoryById,
         updateStory,
         deleteStory,
+        createHandiz,
+        getAllHandiz,
+        getHandizById,
+        updateHandiz,
+        deleteHandiz,
       }}>
       {children}
     </GlobalContext.Provider>
