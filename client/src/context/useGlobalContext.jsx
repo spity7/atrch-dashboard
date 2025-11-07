@@ -84,6 +84,35 @@ export const GlobalProvider = ({ children }) => {
     return response.data
   }
 
+  const createProject = async (data) => {
+    const response = await axiosInstance.post('/projects', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response.data
+  }
+
+  const getAllProjects = async () => {
+    const response = await axiosInstance.get('/projects')
+    return response.data.projects
+  }
+
+  const getProjectById = async (id) => {
+    const response = await axiosInstance.get(`/projects/${id}`)
+    return response.data.project
+  }
+
+  const updateProject = async (id, data) => {
+    const response = await axiosInstance.put(`/projects/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response.data.project
+  }
+
+  const deleteProject = async (id) => {
+    const response = await axiosInstance.delete(`/projects/${id}`)
+    return response.data
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -97,6 +126,11 @@ export const GlobalProvider = ({ children }) => {
         getHandizById,
         updateHandiz,
         deleteHandiz,
+        createProject,
+        getAllProjects,
+        getProjectById,
+        updateProject,
+        deleteProject,
       }}>
       {children}
     </GlobalContext.Provider>

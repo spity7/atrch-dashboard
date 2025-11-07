@@ -21,6 +21,12 @@ export const MENU_ITEMS = [
         url: '/ecommerce/handiz',
         parentKey: 'ecommerce',
       },
+      {
+        key: 'ecommerce-projects',
+        label: 'Projects',
+        url: '/ecommerce/projects',
+        parentKey: 'ecommerce',
+      },
 
       // {
       //   key: 'ecommerce-products',
