@@ -95,7 +95,7 @@ const EditStory = () => {
   return (
     <>
       <PageMetaData title="Edit Story" />
-      <PageBreadcrumb title="Edit Story" subName="Vertex" />
+      <PageBreadcrumb title="Edit Story" subName="Atrch" />
       <Row>
         <Col>
           <Card>

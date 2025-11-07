@@ -26,7 +26,7 @@ const Stories = () => {
   return (
     <>
       <PageMetaData title="Stories List" />
-      <PageBreadcrumb title="Stories List" subName="Vertex" />
+      <PageBreadcrumb title="Stories List" subName="Atrch" />
       <Row>
         <Col>
           <Card>

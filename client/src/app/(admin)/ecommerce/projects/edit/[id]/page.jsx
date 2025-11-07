@@ -79,7 +79,7 @@ const EditProject = () => {
   return (
     <>
       <PageMetaData title="Edit Project" />
-      <PageBreadcrumb title="Edit Project" subName="Vertex" />
+      <PageBreadcrumb title="Edit Project" subName="Atrch" />
       <Row>
         <Col>
           <Card>
