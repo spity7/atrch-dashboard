@@ -19,6 +19,9 @@ const EcommerceProjectUpdate = lazy(() => import('@/app/(admin)/ecommerce/projec
 const EcommerceContacts = lazy(() => import('@/app/(admin)/ecommerce/contacts/page'))
 const EcommerceContactCreate = lazy(() => import('@/app/(admin)/ecommerce/contacts/create/page'))
 const EcommerceContactUpdate = lazy(() => import('@/app/(admin)/ecommerce/contacts/edit/[id]/page'))
+const EcommerceCourses = lazy(() => import('@/app/(admin)/ecommerce/courses/page'))
+const EcommerceCourseCreate = lazy(() => import('@/app/(admin)/ecommerce/courses/create/page'))
+const EcommerceCourseUpdate = lazy(() => import('@/app/(admin)/ecommerce/courses/edit/[id]/page'))
 
 const EcommerceProducts = lazy(() => import('@/app/(admin)/ecommerce/products/page'))
 const EcommerceProductDetails = lazy(() => import('@/app/(admin)/ecommerce/products/[productId]/page'))
@@ -228,6 +231,21 @@ const appsRoutes = [
     name: 'Contact Update',
     path: '/ecommerce/contacts/edit/:id',
     element: <EcommerceContactUpdate />,
+  },
+  {
+    name: 'Courses',
+    path: '/ecommerce/courses',
+    element: <EcommerceCourses />,
+  },
+  {
+    name: 'Create Course',
+    path: '/ecommerce/courses/create',
+    element: <EcommerceCourseCreate />,
+  },
+  {
+    name: 'Course Update',
+    path: '/ecommerce/courses/edit/:id',
+    element: <EcommerceCourseUpdate />,
   },
 
   {

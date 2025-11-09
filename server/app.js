@@ -12,6 +12,7 @@ const storyRoutes = require("./routes/storyRoutes");
 const handizRoutes = require("./routes/handizRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const contactRoutes = require("./routes/contactRoutes");
+const courseRoutes = require("./routes/courseRoutes");
 const logger = require("./config/logger");
 require("./cron/cron");
 
@@ -59,6 +60,7 @@ app.use("/api/v1", storyRoutes);
 app.use("/api/v1", handizRoutes);
 app.use("/api/v1", projectRoutes);
 app.use("/api/v1", contactRoutes);
+app.use("/api/v1", courseRoutes);
 
 // errorhandling for Middleware
 app.use((err, req, res, next) => {

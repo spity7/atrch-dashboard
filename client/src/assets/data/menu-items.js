@@ -33,6 +33,12 @@ export const MENU_ITEMS = [
         url: '/ecommerce/contacts',
         parentKey: 'ecommerce',
       },
+      {
+        key: 'ecommerce-courses',
+        label: 'Courses',
+        url: '/ecommerce/courses',
+        parentKey: 'ecommerce',
+      },
 
       // {
       //   key: 'ecommerce-products',

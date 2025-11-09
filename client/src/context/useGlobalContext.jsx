@@ -2,8 +2,8 @@ import { createContext, useContext, useMemo } from 'react'
 import axios from 'axios'
 
 axios.defaults.withCredentials = true
-// const BASE_URL = 'https://api.atrch.com/api/v1/'
-const BASE_URL = 'http://localhost:5006/api/v1/'
+const BASE_URL = 'https://api.atrch.com/api/v1/'
+// const BASE_URL = 'http://localhost:5006/api/v1/'
 
 const GlobalContext = createContext()
 
@@ -142,6 +142,35 @@ export const GlobalProvider = ({ children }) => {
     return response.data
   }
 
+  const createCourse = async (data) => {
+    const response = await axiosInstance.post('/courses', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response.data
+  }
+
+  const getAllCourses = async () => {
+    const response = await axiosInstance.get('/courses')
+    return response.data.courses
+  }
+
+  const getCourseById = async (id) => {
+    const response = await axiosInstance.get(`/courses/${id}`)
+    return response.data.course
+  }
+
+  const updateCourse = async (id, data) => {
+    const response = await axiosInstance.put(`/courses/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response.data.course
+  }
+
+  const deleteCourse = async (id) => {
+    const response = await axiosInstance.delete(`/courses/${id}`)
+    return response.data
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -165,6 +194,11 @@ export const GlobalProvider = ({ children }) => {
         getContactById,
         updateContact,
         deleteContact,
+        createCourse,
+        getAllCourses,
+        getCourseById,
+        updateCourse,
+        deleteCourse,
       }}>
       {children}
     </GlobalContext.Provider>
