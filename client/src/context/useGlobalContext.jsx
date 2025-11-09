@@ -2,8 +2,8 @@ import { createContext, useContext, useMemo } from 'react'
 import axios from 'axios'
 
 axios.defaults.withCredentials = true
-const BASE_URL = 'https://api.atrch.com/api/v1/'
-// const BASE_URL = 'http://localhost:5006/api/v1/'
+// const BASE_URL = 'https://api.atrch.com/api/v1/'
+const BASE_URL = 'http://localhost:5006/api/v1/'
 
 const GlobalContext = createContext()
 
@@ -51,7 +51,7 @@ export const GlobalProvider = ({ children }) => {
   }
 
   const deleteStory = async (id) => {
-    const response = await axiosInstance.delete(`/handiz/${id}`)
+    const response = await axiosInstance.delete(`/stories/${id}`)
     return response.data
   }
 
@@ -113,6 +113,35 @@ export const GlobalProvider = ({ children }) => {
     return response.data
   }
 
+  const createContact = async (data) => {
+    const response = await axiosInstance.post('/contacts', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response.data
+  }
+
+  const getAllContacts = async () => {
+    const response = await axiosInstance.get('/contacts')
+    return response.data.contacts
+  }
+
+  const getContactById = async (id) => {
+    const response = await axiosInstance.get(`/contacts/${id}`)
+    return response.data.contact
+  }
+
+  const updateContact = async (id, data) => {
+    const response = await axiosInstance.put(`/contacts/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response.data.contact
+  }
+
+  const deleteContact = async (id) => {
+    const response = await axiosInstance.delete(`/contacts/${id}`)
+    return response.data
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -131,6 +160,11 @@ export const GlobalProvider = ({ children }) => {
         getProjectById,
         updateProject,
         deleteProject,
+        createContact,
+        getAllContacts,
+        getContactById,
+        updateContact,
+        deleteContact,
       }}>
       {children}
     </GlobalContext.Provider>

@@ -27,6 +27,12 @@ export const MENU_ITEMS = [
         url: '/ecommerce/projects',
         parentKey: 'ecommerce',
       },
+      {
+        key: 'ecommerce-contacts',
+        label: 'Contacts',
+        url: '/ecommerce/contacts',
+        parentKey: 'ecommerce',
+      },
 
       // {
       //   key: 'ecommerce-products',

@@ -16,6 +16,9 @@ const EcommerceHandizUpdate = lazy(() => import('@/app/(admin)/ecommerce/handiz/
 const EcommerceProjects = lazy(() => import('@/app/(admin)/ecommerce/projects/page'))
 const EcommerceProjectCreate = lazy(() => import('@/app/(admin)/ecommerce/projects/create/page'))
 const EcommerceProjectUpdate = lazy(() => import('@/app/(admin)/ecommerce/projects/edit/[id]/page'))
+const EcommerceContacts = lazy(() => import('@/app/(admin)/ecommerce/contacts/page'))
+const EcommerceContactCreate = lazy(() => import('@/app/(admin)/ecommerce/contacts/create/page'))
+const EcommerceContactUpdate = lazy(() => import('@/app/(admin)/ecommerce/contacts/edit/[id]/page'))
 
 const EcommerceProducts = lazy(() => import('@/app/(admin)/ecommerce/products/page'))
 const EcommerceProductDetails = lazy(() => import('@/app/(admin)/ecommerce/products/[productId]/page'))
@@ -210,6 +213,21 @@ const appsRoutes = [
     name: 'Project Update',
     path: '/ecommerce/projects/edit/:id',
     element: <EcommerceProjectUpdate />,
+  },
+  {
+    name: 'Contacts',
+    path: '/ecommerce/contacts',
+    element: <EcommerceContacts />,
+  },
+  {
+    name: 'Create Contact',
+    path: '/ecommerce/contacts/create',
+    element: <EcommerceContactCreate />,
+  },
+  {
+    name: 'Contact Update',
+    path: '/ecommerce/contacts/edit/:id',
+    element: <EcommerceContactUpdate />,
   },
 
   {
