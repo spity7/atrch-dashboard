@@ -13,6 +13,11 @@ import DropzoneFormInput from '@/components/form/DropzoneFormInput'
 
 const generalFormSchema = yup.object({
   title: yup.string().required('Story title is required'),
+  pOne: yup.string().required('paragraph one is required'),
+  pTwo: yup.string().required('paragraph two is required'),
+  pThree: yup.string().required('paragraph three is required'),
+  pFour: yup.string().required('paragraph four is required'),
+  pFive: yup.string().required('paragraph five is required'),
   descQuill: yup.string().required('Story description is required'),
 })
 
@@ -37,6 +42,11 @@ const GeneralDetailsForm = () => {
     resolver: yupResolver(generalFormSchema),
     defaultValues: {
       title: '',
+      pOne: '',
+      pTwo: '',
+      pThree: '',
+      pFour: '',
+      pFive: '',
       descQuill: '',
     },
   })
@@ -55,6 +65,11 @@ const GeneralDetailsForm = () => {
 
       const formData = new FormData()
       formData.append('title', data.title)
+      formData.append('pOne', data.pOne)
+      formData.append('pTwo', data.pTwo)
+      formData.append('pThree', data.pThree)
+      formData.append('pFour', data.pFour)
+      formData.append('pFive', data.pFive)
 
       formData.append('description', data.descQuill)
       formData.append('thumbnail', thumbnailFile)
@@ -69,6 +84,11 @@ const GeneralDetailsForm = () => {
       // ✅ Clear all form fields properly
       reset({
         title: '',
+        pOne,
+        pTwo,
+        pThree,
+        pFour,
+        pFive,
         descQuill: '',
       })
 
@@ -95,6 +115,76 @@ const GeneralDetailsForm = () => {
             id="story-title"
             name="title"
             // error={errors.title?.message}
+          />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col lg={12}>
+          <TextFormInput
+            control={control}
+            label="paragraph one"
+            placeholder="Enter paragraph 1"
+            containerClassTitle="mb-3"
+            id="pOne"
+            name="pOne"
+            // error={errors.pOne?.message}
+          />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col lg={12}>
+          <TextFormInput
+            control={control}
+            label="paragraph two"
+            placeholder="Enter paragraph 2"
+            containerClassTitle="mb-3"
+            id="pTwo"
+            name="pTwo"
+            // error={errors.pTwo?.message}
+          />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col lg={12}>
+          <TextFormInput
+            control={control}
+            label="paragraph three"
+            placeholder="Enter paragraph 3"
+            containerClassTitle="mb-3"
+            id="pThree"
+            name="pThree"
+            // error={errors.pThree?.message}
+          />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col lg={12}>
+          <TextFormInput
+            control={control}
+            label="paragraph four"
+            placeholder="Enter paragraph 4"
+            containerClassTitle="mb-3"
+            id="pFour"
+            name="pFour"
+            // error={errors.pFour?.message}
+          />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col lg={12}>
+          <TextFormInput
+            control={control}
+            label="paragraph five"
+            placeholder="Enter paragraph 5"
+            containerClassTitle="mb-3"
+            id="pFive"
+            name="pFive"
+            // error={errors.pFive?.message}
           />
         </Col>
       </Row>

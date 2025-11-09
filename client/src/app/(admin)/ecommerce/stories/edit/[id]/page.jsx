@@ -14,6 +14,11 @@ const EditStory = () => {
 
   const [story, setStory] = useState(null)
   const [title, setTitle] = useState('')
+  const [pOne, setPOne] = useState('')
+  const [pTwo, setPTwo] = useState('')
+  const [pThree, setPThree] = useState('')
+  const [pFour, setPFour] = useState('')
+  const [pFive, setPFive] = useState('')
   const [description, setDescription] = useState('')
   const [thumbnail, setThumbnail] = useState(null)
   const [thumbnailPreview, setThumbnailPreview] = useState(null)
@@ -27,6 +32,11 @@ const EditStory = () => {
         const data = await getStoryById(id)
         setStory(data)
         setTitle(data.title)
+        setPOne(data.pOne)
+        setPTwo(data.pTwo)
+        setPThree(data.pThree)
+        setPFour(data.pFour)
+        setPFive(data.pFive)
         setDescription(data.description)
         setThumbnailPreview(data.thumbnailUrl)
         setGalleryPreview(data.galleryUrl)
@@ -70,6 +80,11 @@ const EditStory = () => {
       setLoading(true)
       const formData = new FormData()
       formData.append('title', title)
+      formData.append('pOne', pOne)
+      formData.append('pTwo', pTwo)
+      formData.append('pThree', pThree)
+      formData.append('pFour', pFour)
+      formData.append('pFive', pFive)
       formData.append('description', description)
 
       if (thumbnail) formData.append('thumbnail', thumbnail)
@@ -104,6 +119,31 @@ const EditStory = () => {
                 <div className="mb-3">
                   <label className="form-label">Story Title</label>
                   <input type="text" className="form-control" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">paragraph 1</label>
+                  <input type="text" className="form-control" value={pOne} onChange={(e) => setPOne(e.target.value)} required />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">paragraph 2</label>
+                  <input type="text" className="form-control" value={pTwo} onChange={(e) => setPTwo(e.target.value)} required />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">paragraph 3</label>
+                  <input type="text" className="form-control" value={pThree} onChange={(e) => setPThree(e.target.value)} required />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">paragraph 4</label>
+                  <input type="text" className="form-control" value={pFour} onChange={(e) => setPFour(e.target.value)} required />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">paragraph 5</label>
+                  <input type="text" className="form-control" value={pFive} onChange={(e) => setPFive(e.target.value)} required />
                 </div>
 
                 <div className="mb-3">

@@ -3,13 +3,21 @@ const { uploadImage, deleteImage } = require("../utils/gcs");
 
 exports.createStory = async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, description, pOne, pTwo, pThree, pFour, pFive } = req.body;
     const thumbnailFile = req.files?.thumbnail?.[0];
     const galleryFile = req.files?.gallery?.[0];
 
-    if (!title || !description) {
+    if (
+      !title ||
+      !description ||
+      !pOne ||
+      !pTwo ||
+      !pThree ||
+      !pFour ||
+      !pFive
+    ) {
       return res.status(400).json({
-        message: " Title, and description are required",
+        message: " Title, p1, p2, p3, p4, p5, and description are required",
       });
     }
 
@@ -44,6 +52,11 @@ exports.createStory = async (req, res) => {
     // Save story to DB
     const newStory = await Story.create({
       title,
+      pOne,
+      pTwo,
+      pThree,
+      pFour,
+      pFive,
       description,
       thumbnailUrl,
       galleryUrl,
@@ -85,7 +98,7 @@ exports.getStoryById = async (req, res) => {
 
 exports.updateStory = async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, pOne, pTwo, pThree, pFour, pFive, description } = req.body;
     const thumbnailFile = req.files?.thumbnail?.[0];
     const galleryFile = req.files?.gallery?.[0];
 
@@ -95,7 +108,7 @@ exports.updateStory = async (req, res) => {
       return res.status(404).json({ message: "Story not found" });
     }
 
-    const updateData = { title, description };
+    const updateData = { title, pOne, pTwo, pThree, pFour, pFive, description };
 
     // ✅ Handle new thumbnail upload
     if (thumbnailFile) {
